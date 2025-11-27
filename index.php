@@ -14,23 +14,31 @@
     <?php error_reporting(0); ?>
     <?php session_start(); ?>
 
-    <!-- NAVBAR -->
+ <!-- NAVBAR -->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Pepito Junior</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Inicio</a>
+              </li>
 
               <!-- Menú Agregar -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Agregar</a>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" 
+                  aria-label="Agregar" aria-haspopup="true" aria-expanded="false">
+                  Agregar
+                </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="formAltaCategoria.php">Categoría</a></li>
                   <li><a class="dropdown-item" href="formAltaPregunta.php">Pregunta</a></li>
@@ -42,7 +50,10 @@
 
               <!-- Menú Listar -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Listar</a>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" 
+                  aria-label="Listar" aria-haspopup="true" aria-expanded="false">
+                  Listar
+                </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="listarCategoria.php">Categorías</a></li>
                   <li><a class="dropdown-item" href="listarPregunta.php">Preguntas</a></li>
@@ -53,8 +64,11 @@
               </li>
 
               <li class="nav-item">
-                <a href="./Login/formLogin.php" class="btn btn-light ms-2">Iniciar sesión</a>
+                <a href="./Login/formLogin.php" class="btn btn-light ms-2" aria-label="Iniciar sesión">
+                  Iniciar sesión
+                </a>
               </li>
+
             </ul>
           </div>
         </div>
@@ -111,9 +125,9 @@
           <div class="input-container">
             <label for="user-input" class="sr-only">Escribe tu mensaje</label>
             <input type="text" id="user-input" placeholder="Escribe aquí tu mensaje" autocomplete="off" aria-label="Escribe tu mensaje">
-            <button id="send-btn" class="btn-send"><i class="fas fa-bolt"></i></button>
-            <button id="record-btn" class="btn-attach"><i class="fas fa-microphone"></i></button>
-            <button class="btn-attach"><i class="fas fa-paperclip"></i></button>
+            <button id="send-btn" class="btn-send" aria-label="boton de enviar><i class="fas fa-bolt"></i></button>
+            <button id="record-btn" class="btn-attach" aria-label="boton de microfono"><i class="fas fa-microphone"></i></button>
+            <button class="btn-attach" aria-label="boton de subir archivos"><i class="fas fa-paperclip"></i></button>
           </div>
         </div>
       </section>
@@ -211,15 +225,15 @@ function quitarTyping() {
 // ---------------------------
 function enviarMensaje(mensaje) {
   mostrarTyping();
-  fetch("./conversacion/chatbot.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mensaje })
+    fetch("./Controller/conversacion.controller.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ pregunta: mensaje })
   })
   .then(res => res.json())
   .then(data => {
     quitarTyping();
-    mostrarMensajeBot(data.respuesta || "⚡ No entendí, reformula.");
+    mostrarMensajeBot(data.respuesta || "No entendí, pregunta de nuevo.");
   })
   .catch(err => {
     quitarTyping();

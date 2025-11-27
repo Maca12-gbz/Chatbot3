@@ -58,11 +58,11 @@ $preguntas = Pregunta::obtenerTodxs();
                 </select>
             </div>
             
-            <button type="submit">Guardar Cambios</button>
+            <button type="submit" aria-label="Guardar Cambios">Guardar Cambios</button>
         </form>
 
         <!-- Botón volver -->
-        <a href="listarRespuesta.php" class="volver-btn">← Volver</a>
+        <a href="listarRespuesta.php" class="volver-btn" aria-label="Volver">← Volver</a>
     </div>
 </body>
 </html>

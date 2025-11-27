@@ -1,60 +1,40 @@
 <?php
-// Controller/login.controller.php (DEBUG)
-session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-$usuario_file = __DIR__ . '/../Model/usuario.class.php';
-$database_file = __DIR__ . '/../Model/database.class.php';
+include "../Model/rol.class.php";
 
-// 1) ¿Existe el archivo?
-if (!file_exists($usuario_file)) {
-    die("ERROR: no se encuentra el archivo Model/usuario.class.php en: $usuario_file");
+$operacion = $_POST["operacion"] ?? '';
+$result = null;
+
+if ($operacion === "guardar") {
+    $rol = new Rol(null, $_POST['nombre']);
+    $result = $rol->guardar();
+
+} elseif ($operacion === "actualizar") {
+    $rol = new Rol($_POST['id'], $_POST['nombre']);
+    $result = $rol->actualizar();
+
+} elseif ($operacion === "eliminar") {
+    $rol = new Rol($_POST['id']);
+    $result = $rol->eliminar();
 }
-if (!file_exists($database_file)) {
-    die("ERROR: no se encuentra el archivo Model/database.class.php en: $database_file");
-}
-
-// 2) Incluimos
-require_once $database_file;
-require_once $usuario_file;
-
-// 3) ¿Se cargó la clase?
-if (!class_exists('Usuario')) {
-    die("ERROR: clase Usuario NO encontrada después del require. Verificá Model/usuario.class.php (posible parse error).");
-}
-
-// 4) ¿Existe el método validarLogin?
-if (!method_exists('Usuario', 'validarLogin')) {
-    $metodos = get_class_methods('Usuario') ?: [];
-    die("ERROR: el método validarLogin NO existe en la clase Usuario. Métodos disponibles: " . implode(', ', $metodos));
-}
-
-// Si llegamos acá, el método existe y podemos continuar normalmente
-$operacion = isset($_POST['operacion']) ? $_POST['operacion'] : null;
-if ($operacion !== 'login') {
-    $_SESSION['login_error'] = "Operación no válida.";
-    header("Location: ../login.php");
-    exit;
-}
-
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-
-if ($email === '' || $password === '') {
-    $_SESSION['login_error'] = "Complete email y contraseña.";
-    header("Location: ../login.php");
-    exit;
-}
-
-$usuario = Usuario::validarLogin($email, $password);
-if ($usuario) {
-    $_SESSION['user_id'] = $usuario->id;
-    $_SESSION['user_email'] = $usuario->email;
-    $_SESSION['user_nombre'] = $usuario->nombre;
-    $_SESSION['user_rol'] = $usuario->rol_id;
-    header("Location: ../index.html");
-    exit;
-} else {
-    $_SESSION['login_error'] = "Email o contraseña incorrectos.";
-    header("Location: ../login.php");
-    exit;
-}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado de Operación - Rol</title>
+  <link rel="stylesheet" href="../css/controller.css">
+</head>
+<body>
+  <div class="resultado">
+    <?php if ($result): ?>
+      <p class="exito">✅ La operación se ejecutó con éxito.</p>
+    <?php else: ?>
+      <p class="error">❌ La operación no se ejecutó con éxito.</p>
+    <?php endif; ?>
+    <a href="../listarRol.php" class="volver-btn">← Volver al listado</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  text-align: center;
+  padding: 40px;
+}
+
+.resultado {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  display: inline-block;
+}
+
+.exito {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.error {
+  color: #b00020;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.volver-btn {
+  margin-top: 20px;
+  display: inline-block;
+  background-color: #f39c12;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.volver-btn:hover {
+  background-color: #d35400;
+}

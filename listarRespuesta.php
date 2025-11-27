@@ -19,7 +19,7 @@ foreach (Pregunta::obtenerTodxs() as $p) {
 <body>
     <h2>Listado de Respuestas</h2>
 
-    <a class="agregar-btn" href="formAltaRespuesta.php">+ Nueva Respuesta</a>
+    <a class="agregar-btn" href="formAltaRespuesta.php" aria-label="agregar nueva respuesta">+ Nueva Respuesta</a>
 
     <table>
         <thead>
@@ -40,12 +40,12 @@ foreach (Pregunta::obtenerTodxs() as $p) {
                         <td>
                             <form action="formEditarRespuesta.php" method="GET" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($r['id']) ?>" />
-                               <button type="submit" class="editar">Editar</button>
+                               <button type="submit" class="editar" aria-label="editar respuesta">Editar</button>
                             </form>
                             <form action="Controller/respuesta.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar esta respuesta?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($r['id']) ?>" />
-                                <button type="submit" class="eliminar">Eliminar</button>
+                                <button type="submit" class="eliminar"aria-label="eliminar respuesta">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -57,6 +57,6 @@ foreach (Pregunta::obtenerTodxs() as $p) {
     </table>
 
     <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php" aria-label="colver a inicio">← Volver al inicio</a>
 </body>
 </html>

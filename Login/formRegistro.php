@@ -1,50 +1,48 @@
 <?php
-// Incluir la conexión a la base de datos
-include('conexion.php'); 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recibir los datos del formulario
-    $usuario = $_POST['usuario'];
-    $contraseña = password_hash($_POST['contraseña'], PASSWORD_DEFAULT); // Cifrar la contraseña
-    $rol = $_POST['rol'];
-
-    // Insertar el nuevo usuario en la base de datos
-    $sql = "INSERT INTO usuarios (nombre_usuario, contraseña, rol) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $usuario, $contraseña, $rol); // Asignar parámetros
-    $stmt->execute();
-
-    // Confirmar que el registro fue exitoso y redirigir o mostrar mensaje
-    echo "Usuario registrado con éxito";
-    header("Location: login.php"); // Redirigir a la página de inicio de sesión
-}
+session_start();
+$success_message = $_SESSION['register_success'] ?? '';
+$error_message = $_SESSION['register_error'] ?? '';
+unset($_SESSION['register_success'], $_SESSION['register_error']);
 ?>
-
-<!-- Formulario HTML para registrar usuarios -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+  <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <h2>Registrar un nuevo usuario</h2>
-    <form action="registro.php" method="POST">
-        <label for="usuario">Usuario:</label>
-        <input type="text" name="usuario" required><br>
-        
-        <label for="contraseña">Contraseña:</label>
-        <input type="password" name="contraseña" required><br>
+<main class="container">
+  <h1>Registrar Usuario</h1>
 
-        <label for="rol">Rol:</label>
-        <select name="rol">
-            <option value="Administrador">Administrador</option>
-            <option value="Moderador">Moderador</option>
-            <option value="Analista">Analista</option>
-            <option value="Usuario Común">Usuario Común</option>
-        </select><br>
+  <?php if ($error_message): ?>
+    <p class="message error"><?php echo htmlspecialchars($error_message); ?></p>
+  <?php endif; ?>
+  <?php if ($success_message): ?>
+    <p class="message success"><?php echo htmlspecialchars($success_message); ?></p>
+  <?php endif; ?>
 
-        <button type="submit">Registrar</button>
-    </form>
+  <form action="../Controller/loginController.php" method="POST">
+    <input type="hidden" name="action" value="register">
+    <label for="email">Email nuevo:</label>
+    <input type="email" name="email" required placeholder="nuevo.email@ejemplo.com">
+
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" required placeholder="********">
+
+    <label for="rol">Rol:</label>
+    <select name="rol">
+      <option value="Usuario Común">Usuario Común</option>
+      <option value="Analista">Analista</option>
+      <option value="Moderador">Moderador</option>
+      <option value="Administrador">Administrador</option>
+    </select>
+
+    <button type="submit" class="secondary-btn">Registrar</button>
+  </form>
+
+  <hr style="margin:20px 0;">
+  <a href="formLogin.php"><button>Volver al Login</button></a>
+</main>
 </body>
 </html>

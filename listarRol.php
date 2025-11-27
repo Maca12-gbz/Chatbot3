@@ -24,7 +24,7 @@ $roles = Rol::obtenerTodxs();
         </p>
     <?php endif; ?>
 
-    <a class="agregar-btn" href="formAltaRol.php">+ Nuevo Rol</a>
+    <a class="agregar-btn" href="formAltaRol.php" aria-label="Agregar nuevo rol">+ Nuevo Rol</a>
 
     <table>
         <thead>
@@ -40,11 +40,11 @@ $roles = Rol::obtenerTodxs();
                     <td><?= $rol['id'] ?></td>
                     <td><?= htmlspecialchars($rol['nombre']) ?></td>
                     <td>
-                        <a href="formEditarRol.php?id=<?= htmlspecialchars($rol['id']); ?>" class="editar">Editar Rol</a>
+                        <a href="formEditarRol.php?id=<?= htmlspecialchars($rol['id']); ?>" class="editar" aria-label="editar rol">Editar Rol</a>
                         <form action="Controller/rol.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este rol?');">
                             <input type="hidden" name="operacion" value="eliminar"/>
                             <input type="hidden" name="id" value="<?= $rol['id'] ?>">
-                            <button type="submit" class="eliminar">Eliminar</button>
+                            <button type="submit" class="eliminar" aria-label="eliminar rol">Eliminar</button>
                         </form>
                     </td>
                 </tr>

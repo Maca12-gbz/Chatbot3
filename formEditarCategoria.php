@@ -16,18 +16,18 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
 <body>
     <?php if (!empty($categoria)): ?>
         <h2>Editar Categoría</h2>
-        <form action="../chatbot/Controller/categoria.controller.php" method="POST">
+        <form action="Controller/categoria.controller.php" method="POST">
             <input type="hidden" name="operacion" value="actualizar" />
             <input type="hidden" name="id" value="<?= htmlspecialchars($categoria->getId()) ?>" />
 
             <label for="nombre">Nombre de la Categoría:</label>
             <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($categoria->getNombre()) ?>" required />
 
-            <button type="submit">Guardar Cambios</button>
+            <button type="submit" aria-label="Guardar Cambios" >Guardar Cambios</button>
         </form>
 
         <!-- Botón volver -->
-        <a href="listarCategoria.php" class="volver-btn">← Volver</a>
+        <a href="listarCategoria.php" class="volver-btn" aria-label="Volver">← Volver</a>
     <?php else: ?>
         <p style="color:red; text-align:center;">El ID ingresado no corresponde a ninguna categoría válida.</p>
         <a href="../chatbot/listarCategoria.php" class="volver-btn">← Volver</a>

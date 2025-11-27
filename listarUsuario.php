@@ -18,7 +18,7 @@ foreach (Rol::obtenerTodxs() as $r) {
 <body>
     <h2>Listado de Usuarios</h2>
 
-    <a class="agregar-btn" href="formAltaUsuario.php">+ Nuevo Usuario</a>
+    <a class="agregar-btn" href="formAltaUsuario.php" aria-label="Agregar nuevo usuario">+ Nuevo Usuario</a>
 
     <table>
         <thead>
@@ -39,11 +39,11 @@ foreach (Rol::obtenerTodxs() as $r) {
                         <td><?= htmlspecialchars($usuario['email']) ?></td>
                         <td><?= isset($roles[$usuario['rol_id']]) ? htmlspecialchars($roles[$usuario['rol_id']]) : 'Sin rol' ?></td>
                         <td>
-                            <a href="formEditarUsuario.php?id=<?= htmlspecialchars($usuario['id']) ?>" class="editar">Editar</a>
+                            <a href="formEditarUsuario.php?id=<?= htmlspecialchars($usuario['id']) ?>" class="editar" aria-label="editar usuario">Editar</a>
                             <form action="Controller/usuario.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este usuario?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($usuario['id']) ?>" />
-                                <button type="submit" class="eliminar">Eliminar</button>
+                                <button type="submit" class="eliminar" aria-label="eliminar usuario">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -55,6 +55,6 @@ foreach (Rol::obtenerTodxs() as $r) {
     </table>
 
     <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php" aria-label="volver a inicio">← Volver al inicio</a>
 </body>
 </html>

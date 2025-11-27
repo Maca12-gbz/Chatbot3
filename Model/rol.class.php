@@ -1,9 +1,8 @@
 <?php
-require_once "database.class.php";
-      class Rol{
+require_once __DIR__ . "/database.class.php";
+      class Rol {
         private $id;
         private $nombre;
-    
         private $conexion;
 
 

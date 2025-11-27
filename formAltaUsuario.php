@@ -1,6 +1,29 @@
 <?php
 require_once("Model/rol.class.php");
 $roles = Rol::obtenerTodxs();
+
+$mensaje = '';
+if (isset($_GET['exito'])) {
+    $mensaje = "✅ Usuario guardado correctamente.";
+} elseif (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'guardar':
+            $mensaje = "❌ Error al guardar el usuario.";
+            break;
+        case 'nombre_vacio':
+            $mensaje = "⚠️ El campo nombre está vacío.";
+            break;
+        case 'correo_vacio':
+            $mensaje = "⚠️ El campo correo está vacío.";
+            break;
+        case 'clave_vacia':
+            $mensaje = "⚠️ El campo clave está vacío.";
+            break;
+        case 'rol_vacio':
+            $mensaje = "⚠️ Debe seleccionar un rol.";
+            break;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,6 +34,10 @@ $roles = Rol::obtenerTodxs();
 </head>
 <body>
     <h2 style="text-align: center;">Formulario de Alta de Usuario</h2>
+
+    <?php if ($mensaje): ?>
+      <p class="message"><?php echo htmlspecialchars($mensaje); ?></p>
+    <?php endif; ?>
 
     <form action="Controller/usuario.controller.php" method="POST">
         <input type="hidden" name="operacion" value="guardar" />
@@ -33,10 +60,10 @@ $roles = Rol::obtenerTodxs();
         </select>
 
         <!-- Botón para agregar usuario -->
-        <button type="submit">Agregar Usuario</button>
+        <button type="submit" aria-label="Agregar Usuario">Agregar Usuario</button>
     </form>
-       <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php">← Volver al inicio</a>
+
+    <!-- Botón para volver al inicio -->
+    <a class="volver-btn" href="index.php" aria-label="Volver">← Volver al inicio</a>
 </body>
 </html>
-                

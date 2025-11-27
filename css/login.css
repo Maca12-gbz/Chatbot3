@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.15);
+  width: 380px;
+}
+h1 {
+  text-align: center;
+  color: #222;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+input, select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #666;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+}
+input:focus, select:focus {
+  outline: 2px solid #0056b3;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #004494;
+}
+.secondary-btn {
+  background-color: #6c757d;
+}
+.secondary-btn:hover {
+  background-color: #5a6268;
+}
+.message {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.error { color: #b00020; }
+.success { color: #2e7d32; }
+
+.volver-separado {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.volver-btn {
+  background-color: #f39c12;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.volver-btn:hover {
+  background-color: #d6d6d6;
+  border-color: #777;
+}
+.volver-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.volver-destacado {
+  background-color: #f39c12; /* naranja suave */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.volver-destacado:hover {
+  background-color: #d35400; /* naranja más oscuro */
+}

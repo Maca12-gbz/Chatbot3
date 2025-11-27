@@ -1,5 +1,9 @@
+/* =============================== */
+/*     BARRA DE NAVEGACIÓN (NUEVA) */
+/* =============================== */
+
 .navbar {
-  background-color: #274ae4;
+  background-color: #1a2bb8; /* azul oscuro accesible */
   box-shadow: 0 2px 6px rgba(15, 146, 207, 0.1);
   padding: 10px 30px;
   display: flex;
@@ -16,7 +20,7 @@
 .navbar-brand {
   font-weight: bold;
   font-size: 20px;
-  color: #fff;
+  color: #ffffff; /* contraste */
   margin-right: 20px;
 }
 
@@ -30,8 +34,8 @@
 
 .nav-link,
 .dropdown-toggle {
-  color: #fff;
-  font-weight: 500;
+  color: #ffffff;
+  font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
   transition: all 0.3s ease;
@@ -39,13 +43,17 @@
 
 .nav-link:hover,
 .dropdown-toggle:hover {
-  color: #22c983;
-  background-color: rgba(46, 185, 120, 0.1);
+  color: #0affb6; /* verde accesible */
+  background-color: rgba(0,0,0,0.15); 
   transform: scale(1.05);
 }
 
+/* =============================== */
+/*          DROPDOWN MENU          */
+/* =============================== */
+
 .dropdown-menu {
-  background-color: #4361ee;
+  background-color: #0f1d8a; /* azul muy oscuro */
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   position: absolute;
@@ -57,28 +65,77 @@
 }
 
 .dropdown-item {
-  color: #fff;
+  color: #ffffff;
   padding: 10px 16px;
   transition: background-color 0.3s ease;
 }
 
-.dropdown-item:hover {
-  background-color: #3f37c9;
-  color: #ffd700;
+/* =============================== */
+/*   ESTILO A (PRINCIPAL USADO)    */
+/* =============================== */
+/* LISTAR → azul claro accesible */
+.dropdown-item.listar {
+  background-color: #3498db;
+  color: #ffffff !important;
 }
 
+.dropdown-item.listar:hover {
+  background-color: #217dbb;
+  color: #ffffff !important;
+}
+
+/* AGREGAR → violeta accesible */
+.dropdown-item.agregar {
+  background-color: #9b59b6;
+  color: #ffffff !important;
+}
+
+.dropdown-item.agregar:hover {
+  background-color: #7d3c98;
+  color: #ffffff !important;
+}
+
+/* =============================== */
+/*   ESTILO B (ALTERNATIVO)        */
+/* =============================== */
+/* LISTAR → verde */
+.dropdown-item.listar-alt {
+  background-color: #27ae60;
+  color: #ffffff !important;
+}
+
+.dropdown-item.listar-alt:hover {
+  background-color: #1e8449;
+  color: #ffffff !important;
+}
+
+/* AGREGAR → naranja */
+.dropdown-item.agregar-alt {
+  background-color: #e67e22;
+  color: #ffffff !important;
+}
+
+.dropdown-item.agregar-alt:hover {
+  background-color: #ca6f1e;
+  color: #ffffff !important;
+}
+
+/* =============================== */
+/*            BOTÓN LIGHT          */
+/* =============================== */
+
 .btn-light {
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 20px;
   padding: 6px 14px;
-  background-color: #fff;
-  color: #4361ee;
+  background-color: #ffffff;
+  color: #1a2bb8;
   transition: all 0.3s ease;
 }
 
 .btn-light:hover {
-  background-color: #ffd700;
-  color: #3f37c9;
+  background-color: #0affb6;
+  color: #09125b;
   transform: scale(1.05);
 }
 
@@ -92,6 +149,10 @@
   transform: rotate(8deg) scale(1.1);
 }
 
+/* ================================================================== */
+/*             RESTO DEL CÓDIGO – CONTENIDO PRINCIPAL                 */
+/* ================================================================== */
+
 .intro-section {
   display: flex;
   flex-direction: row-reverse; /* invierte el orden */
@@ -102,7 +163,6 @@
   gap: 40px;
   flex-wrap: wrap;
 }
-
 
 .intro-text {
   flex: 1;

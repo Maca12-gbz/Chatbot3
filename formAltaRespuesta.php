@@ -1,8 +1,24 @@
 <?php
 require_once(__DIR__ . '/Model/preguntas.class.php');
 $preguntas = Pregunta::obtenerTodxs();
-?>
 
+$mensaje = '';
+if (isset($_GET['exito'])) {
+    $mensaje = "✅ Respuesta guardada correctamente.";
+} elseif (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'guardar':
+            $mensaje = "❌ Error al guardar la respuesta.";
+            break;
+        case 'respuesta_vacia':
+            $mensaje = "⚠️ El campo respuesta está vacío.";
+            break;
+        case 'pregunta_vacia':
+            $mensaje = "⚠️ Debe seleccionar una pregunta.";
+            break;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,9 +27,15 @@ $preguntas = Pregunta::obtenerTodxs();
     <link rel="stylesheet" href="css/formAlta.css">
 </head>
 <body>
-    <h2>Alta de Respuesta</h2>
+    <h2 style="text-align: center;">Formulario de Alta de Respuesta</h2>
+
+    <?php if ($mensaje): ?>
+      <p class="message"><?= htmlspecialchars($mensaje) ?></p>
+    <?php endif; ?>
+
     <form action="Controller/respuesta.controller.php" method="POST">
-        <input type="hidden" name="operacion" value="alta" />
+        <!-- ahora coincide con el controller -->
+        <input type="hidden" name="operacion" value="guardar" />
 
         <label for="respuesta">Respuesta:</label><br>
         <textarea name="respuesta" id="respuesta" rows="3" cols="50" required></textarea><br><br>
@@ -26,9 +48,10 @@ $preguntas = Pregunta::obtenerTodxs();
             <?php endforeach; ?>
         </select><br><br>
 
-        <button type="submit">Guardar</button>
+        <button type="submit" aria-label="Agregar Respuesta">Guardar</button>
     </form>
+
     <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php" aria-label="Volver">← Volver al inicio</a>
 </body>
 </html>

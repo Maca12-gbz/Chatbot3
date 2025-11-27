@@ -4,7 +4,7 @@ require_once "database.class.php";
 class Pregunta {
     private $id;
     private $texto;
-    private Categoria $id_categoria;
+    private $id_categoria; // ahora es un entero
     private $conexion;
 
     public function __construct($id = null, $texto = null, $id_categoria = null) {
@@ -21,10 +21,8 @@ class Pregunta {
         $stmt->execute([$id]);
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($resultado) {
-
-            $categoria = Categoria::obtenerPorId(id: $resultado['id']); 
             return new Pregunta(
-                $categoria, 
+                $resultado['id'],
                 $resultado['preguntas'],
                 $resultado['id_categorias']
             );
@@ -57,27 +55,10 @@ class Pregunta {
         return $stmt->execute([$this->id]);
     }
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function getTexto() {
-        return $this->texto;
-    }
-
-    public function getIdCategoria() {
-        return $this->id_categoria;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function setTexto($texto) {
-        $this->texto = $texto;
-    }
-
-    public function setIdCategoria($id_categoria) {
-        $this->id_categoria = $id_categoria;
-    }
+    public function getId() { return $this->id; }
+    public function getTexto() { return $this->texto; }
+    public function getIdCategoria() { return $this->id_categoria; }
+    public function setId($id) { $this->id = $id; }
+    public function setTexto($texto) { $this->texto = $texto; }
+    public function setIdCategoria($id_categoria) { $this->id_categoria = $id_categoria; }
 }

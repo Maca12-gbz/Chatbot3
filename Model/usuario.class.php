@@ -1,6 +1,6 @@
 <?php
 require_once "database.class.php";
-include_once "rol.class.php"; 
+
 class Usuario
 {
     private $id;
@@ -118,8 +118,7 @@ public static function obtenerPorEmail($email)
         return $this->rol;
     }
 
-    public function actualizar()
-{
+    public function actualizar(){
     $sql = "UPDATE usuarios SET nombre = ?, email = ?, clave = ?, rol_id = ? WHERE id = ?";
     $stmt = $this->conexion->prepare($sql);
     $ok = $stmt->execute([$this->nombre, $this->email, $this->clave, $this->rol, $this->id]);

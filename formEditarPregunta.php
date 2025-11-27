@@ -36,14 +36,14 @@ if (isset($_GET['id'])) {
                 <?php endforeach; ?>
             </select>
 
-            <button type="submit">Guardar Cambios</button>
+            <button type="submit" aria-label="Guardar Cambios">Guardar Cambios</button>
         </form>
 
         <!-- Botón volver -->
         <a href="listarPregunta.php" class="volver-btn">← Volver</a>
     <?php else: ?>
         <h2 style="color:red; text-align:center;">No se encontró la pregunta</h2>
-        <a href="listarPregunta.php" class="volver-btn">← Volver</a>
+        <a href="listarPregunta.php" class="volver-btn" aria-label="Volver">← Volver</a>
     <?php endif; ?>
 </body>
 </html>

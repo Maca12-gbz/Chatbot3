@@ -1,37 +1,41 @@
-/* Estilo general para formularios de edición */
+/* Fondo general igual al de listar */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
+  background-color: #eef1f5;
   margin: 0;
   padding: 0;
-  font-size: 16px; /* tamaño mínimo accesible */
-  color: #2c3e50;  /* texto con buen contraste */
+  font-size: 16px;
+  color: #2c3e50;
 }
 
+/* Título */
 h2 {
   text-align: center;
   margin-top: 30px;
   color: #2c3e50;
 }
 
+/* Formulario con mismo estilo de caja que LISTAR */
 form {
-  width: 400px;
-  max-width: 90%;
-  margin: 30px auto;
+  width: 420px;
+  max-width: 95%;
+  margin: 35px auto;
   padding: 20px;
-  background-color: #fff;
-  border: 2px solid #f39c12; /* borde naranja para diferenciar edición */
+  background-color: #ffffff;
+  border: 2px solid #003f7f; /* azul oscuro para contraste AA+ */
   border-radius: 8px;
   box-shadow: 0 0 12px rgba(0,0,0,0.08);
 }
 
+/* Etiquetas */
 label {
   display: block;
   margin-bottom: 6px;
   font-weight: bold;
-  color: #34495e;
+  color: #2c3e50;
 }
 
+/* Inputs */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -40,58 +44,52 @@ select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #666; /* contraste mejorado */
-  border-radius: 4px;
+  border: 1.8px solid #333;  /* contraste AA */
+  border-radius: 6px;
   font-size: 1rem;
-  line-height: 1.4;
 }
 
-/* Botón guardar cambios */
+/* Botón Guardar Cambios — color coherente con la tabla */
 button[type="submit"],
 input[type="submit"] {
   width: 100%;
-  background-color: #f39c12; /* naranja accesible */
+  background-color: #0056b3; /* mismo azul del encabezado de la tabla */
   color: #ffffff;
   border: none;
   padding: 12px;
   font-size: 1rem;
+  font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, outline 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover,
 input[type="submit"]:hover {
-  background-color: #e67e22;
+  background-color: #003f7f; /* azul más oscuro */
 }
 
-/* Focus visible para accesibilidad teclado */
-button[type="submit"]:focus,
-input[type="submit"]:focus,
-.volver-btn:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 3px solid #ffbf47; /* amarillo accesible */
+/* FOCUS accesible */
+:focus {
+  outline: 3px solid #ffbf47;
   outline-offset: 2px;
 }
 
-/* Botón volver */
+/* Botón Volver — igual al de LISTAR */
 .volver-btn {
   display: block;
   width: 200px;
   margin: 20px auto;
   padding: 12px;
   text-align: center;
-  background-color: #3498db;
+  background-color: #0a128a;
   color: #ffffff;
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
-  transition: background-color 0.3s ease, outline 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .volver-btn:hover {
-  background-color: #2980b9;
+  background-color: #060c5e;
 }
-

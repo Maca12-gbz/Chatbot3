@@ -13,7 +13,7 @@ $categorias = Categoria::obtenerTodxs();
 <body>
     <h2>Listado de Categorías</h2>
 
-    <a class="agregar-btn" href="formAltaCategoria.php">+ Nueva Categoría</a>
+    <a class="agregar-btn" href="formAltaCategoria.php" aria-label="Agregar nueva categoría">+ Nueva Categoría</a>
 
     <table>
         <thead>
@@ -30,11 +30,11 @@ $categorias = Categoria::obtenerTodxs();
                         <td><?= htmlspecialchars($categoria['id']) ?></td>
                         <td><?= htmlspecialchars($categoria['nombre']) ?></td>
                         <td>
-                           <a href="formEditarCategoria.php?id=<?= htmlspecialchars($categoria['id']) ?>" class="editar">Editar Categoría</a>
+                           <a href="formEditarCategoria.php?id=<?= htmlspecialchars($categoria['id']) ?>" class="editar" aria-label="editar categoría" >Editar Categoría</a>
                             <form action="Controller/categoria.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar esta categoría?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($categoria['id']) ?>" />
-                                <button type="submit" class="eliminar">Eliminar</button>
+                                <button type="submit" class="eliminar" aria-label="eliminar categoría">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -46,6 +46,6 @@ $categorias = Categoria::obtenerTodxs();
     </table>
 
     <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php" aria-label="volver al inicio">← Volver al inicio</a>
 </body>
 </html>

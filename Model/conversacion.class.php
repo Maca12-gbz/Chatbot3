@@ -22,30 +22,15 @@ class Conversacion {
         $conn = Database::getInstance()->getConnection();
         $sql  = "SELECT * FROM conversaciones ORDER BY fecha_hora DESC";
         $stmt = $conn->query($sql);
-        $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $lista = [];
-        foreach ($filas as $f) {
-            $lista[] = [
-                'id'               => $f['id'],
-                'pregunta_usuario' => $f['pregunta_usuario'],
-                'respuesta_bot'    => $f['respuesta_bot'],
-                'fecha_hora'       => $f['fecha_hora']
-            ];
-        }
-        return $lista;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
- /** Getters */
-    public function getId() {
-        return $this->id;
-    }
+
     public function getPreguntaUsuario() {
         return $this->preguntaUsuario;
     }
+
     public function getRespuestaBot() {
         return $this->respuestaBot;
-    }
-    public function getFechaHora() {
-        return $this->fechaHora;
     }
 }
 ?>
