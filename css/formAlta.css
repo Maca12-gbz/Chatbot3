@@ -1,0 +1,92 @@
+/* Estilo general para formularios de alta */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #111111; /* texto principal con contraste máximo */
+}
+
+h2 {
+  text-align: center;
+  margin-top: 30px;
+  color: #111111;
+}
+
+form {
+  width: 400px;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #333333; /* contraste mejorado */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #111111;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  width: 100%;
+  background-color: #006400; /* verde oscuro accesible */
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: #004d00;
+}
+
+button[type="submit"]:focus,
+input[type="submit"]:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.volver-btn:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.volver-btn {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 12px;
+  text-align: center;
+  background-color: #00008B; /* azul marino accesible */
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.volver-btn:hover {
+  background-color: #000066;
+}
+

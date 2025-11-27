@@ -1,0 +1,143 @@
+.navbar {
+  background-color: #274ae4;
+  box-shadow: 0 2px 6px rgba(15, 146, 207, 0.1);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+  margin-right: 20px;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link,
+.dropdown-toggle {
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.dropdown-toggle:hover {
+  color: #22c983;
+  background-color: rgba(46, 185, 120, 0.1);
+  transform: scale(1.05);
+}
+
+.dropdown-menu {
+  background-color: #4361ee;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: absolute;
+  display: none;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  color: #fff;
+  padding: 10px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #3f37c9;
+  color: #ffd700;
+}
+
+.btn-light {
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 6px 14px;
+  background-color: #fff;
+  color: #4361ee;
+  transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+  background-color: #ffd700;
+  color: #3f37c9;
+  transform: scale(1.05);
+}
+
+/* Mascota a la derecha */
+.navbar-right .mascot-icon {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-right .mascot-icon:hover {
+  transform: rotate(8deg) scale(1.1);
+}
+
+.intro-section {
+  display: flex;
+  flex-direction: row-reverse; /* invierte el orden */
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 60px;
+  background-color: #f8f9fa;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+
+.intro-text {
+  flex: 1;
+  min-width: 300px;
+  color: #333;
+}
+
+.intro-text h1 {
+  font-size: 32px;
+  color: #4361ee;
+  margin-bottom: 10px;
+}
+
+.intro-text h2 {
+  font-size: 22px;
+  color: #3f37c9;
+  margin-top: 20px;
+}
+
+.intro-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.intro-mascot {
+  flex: 0 0 200px;
+  text-align: center;
+}
+
+.mascot-large {
+  max-width: 180px;
+  transition: transform 0.3s ease;
+}
+
+.mascot-large:hover {
+  transform: scale(1.1) rotate(5deg);
+}

@@ -1,0 +1,97 @@
+/* Estilo general para formularios de edición */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  font-size: 16px; /* tamaño mínimo accesible */
+  color: #2c3e50;  /* texto con buen contraste */
+}
+
+h2 {
+  text-align: center;
+  margin-top: 30px;
+  color: #2c3e50;
+}
+
+form {
+  width: 400px;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #f39c12; /* borde naranja para diferenciar edición */
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #34495e;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #666; /* contraste mejorado */
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Botón guardar cambios */
+button[type="submit"],
+input[type="submit"] {
+  width: 100%;
+  background-color: #f39c12; /* naranja accesible */
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, outline 0.2s ease;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: #e67e22;
+}
+
+/* Focus visible para accesibilidad teclado */
+button[type="submit"]:focus,
+input[type="submit"]:focus,
+.volver-btn:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #ffbf47; /* amarillo accesible */
+  outline-offset: 2px;
+}
+
+/* Botón volver */
+.volver-btn {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 12px;
+  text-align: center;
+  background-color: #3498db;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, outline 0.2s ease;
+}
+
+.volver-btn:hover {
+  background-color: #2980b9;
+}
+
