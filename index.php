@@ -1,3 +1,7 @@
+<?php
+session_start();
+$nombreUsuario = $_SESSION['usuario']['nombre'] ?? null;
+?>
   <!DOCTYPE html>
   <html lang="es">
   <head>
@@ -9,128 +13,148 @@
     <link rel="stylesheet" href="css/barranavegacion.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      padding-top: 80px; /* Ajusta según el alto de tu navbar */
+    }
+  </style>
   </head>
   <body>
-    <?php error_reporting(0); ?>
-    <?php session_start(); ?>
 
- <!-- NAVBAR -->
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Pepito Junior</a>
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Pepito Junior</a>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" 
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
 
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Inicio</a>
-              </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="index.php">Inicio</a>
+          </li>
 
-              <!-- Menú Agregar -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" 
-                  aria-label="Agregar" aria-haspopup="true" aria-expanded="false">
-                  Agregar
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="formAltaCategoria.php">Categoría</a></li>
-                  <li><a class="dropdown-item" href="formAltaPregunta.php">Pregunta</a></li>
-                  <li><a class="dropdown-item" href="formAltaRespuesta.php">Respuesta</a></li>
-                  <li><a class="dropdown-item" href="formAltaRol.php">Rol</a></li>
-                  <li><a class="dropdown-item" href="formAltaUsuario.php">Usuario</a></li>
-                </ul>
-              </li>
-
-              <!-- Menú Listar -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" 
-                  aria-label="Listar" aria-haspopup="true" aria-expanded="false">
-                  Listar
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="listarCategoria.php">Categorías</a></li>
-                  <li><a class="dropdown-item" href="listarPregunta.php">Preguntas</a></li>
-                  <li><a class="dropdown-item" href="listarRespuesta.php">Respuestas</a></li>
-                  <li><a class="dropdown-item" href="listarRol.php">Roles</a></li>
-                  <li><a class="dropdown-item" href="listarUsuario.php">Usuarios</a></li>
-                </ul>
-              </li>
-
-              <li class="nav-item">
-                <a href="./Login/formLogin.php" class="btn btn-light ms-2" aria-label="Iniciar sesión">
-                  Iniciar sesión
-                </a>
-              </li>
-
+          <!-- Menú Agregar -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Agregar</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="formAltaCategoria.php">Categoría</a></li>
+              <li><a class="dropdown-item" href="formAltaPregunta.php">Pregunta</a></li>
+              <li><a class="dropdown-item" href="formAltaRespuesta.php">Respuesta</a></li>
+              <li><a class="dropdown-item" href="formAltaRol.php">Rol</a></li>
+              <li><a class="dropdown-item" href="formAltaUsuario.php">Usuario</a></li>
             </ul>
-          </div>
+          </li>
+
+          <!-- Menú Listar -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Listar</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="listarCategoria.php">Categorías</a></li>
+              <li><a class="dropdown-item" href="listarPregunta.php">Preguntas</a></li>
+              <li><a class="dropdown-item" href="listarRespuesta.php">Respuestas</a></li>
+              <li><a class="dropdown-item" href="listarRol.php">Roles</a></li>
+              <li><a class="dropdown-item" href="listarUsuario.php">Usuarios</a></li>
+            </ul>
+          </li>
+
+          <!-- Sesión -->
+          <!-- Sesión -->
+            <?php if ($nombreUsuario): ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+                  <i class="fas fa-user-circle fa-lg text-light"></i>
+                  <span class="text-light"><?= htmlspecialchars($nombreUsuario); ?></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                  <li><a class="dropdown-item" href="Controller/login.controller.php?action=logout">Cerrar sesión</a></li>
+                </ul>
+              </li>
+            <?php else: ?>
+              <li class="nav-item">
+                <a href="./Login/formLogin.php" class="btn btn-light ms-2">Iniciar sesión</a>
+              </li>
+            <?php endif; ?>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="container">
+
+  <!-- Carteles de sesión -->
+  <?php if (!empty($_GET['msg'])): ?>
+    <div id="alert-msg" class="alert alert-success text-center">
+      <?= htmlspecialchars($_GET['msg']); ?>
+    </div>
+  <?php endif; ?>
+
+  <!-- Presentación -->
+  <section class="intro-section d-flex justify-content-between align-items-center">
+    <div class="intro-text">
+      <h1>Pepito Junior</h1>
+      <h2>¿Qué es este sistema?</h2>
+      <p>
+        Este sistema permite gestionar las consultas realizadas por los usuarios. Podés agregar nuevas consultas, ver un listado y recibir respuestas con ayuda de nuestro chatbot.
+      </p>
+      <h2>Conocé a nuestro asistente: Pepito Junior</h2>
+      <p>
+        ¡Hola! Soy Pepito, tu asistente virtual. Estoy aquí para ayudarte a gestionar tus consultas de forma eficiente.
+      </p>
+    </div>
+    <div class="intro-mascot">
+      <img src="img/mascota.png" alt="Mascota Pepito Junior" class="mascot-large">
+    </div>
+  </section>
+
+  <!-- Chat -->
+  <section class="chat-section mt-4">
+    <div class="chat-app">
+      <header class="chat-header d-flex justify-content-between align-items-center">
+        <div class="chat-avatar" aria-hidden="true">
+          <img src="img/mascota.png" alt="Avatar del chatbot" class="chat-avatar">
         </div>
-      </nav>
-    </header>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-grid">
-      <!-- Presentación -->
-    <section class="intro-section">
-        <div class="intro-text">
-          <h1>Pepito Junior</h1>
-          <h2>¿Qué es este sistema?</h2>
-          <p>
-            Este sistema permite gestionar las consultas realizadas por los usuarios. Podés agregar nuevas consultas, ver un listado y recibir respuestas con ayuda de nuestro chatbot.
-          </p>
-          <h2>Conocé a nuestro asistente: Pepito Junior</h2>
-          <p>
-            ¡Hola! Soy Pepito, tu asistente virtual. Estoy aquí para ayudarte a gestionar tus consultas de forma eficiente.
-          </p>
+        <div class="chat-title">
+          <h1>Junior</h1>
+          <p class="status"></p>
         </div>
-
-        <div class="intro-mascot">
-          <img src="img/mascota.png" alt="Mascota de este Chat Pepito Junior" class="mascot-large">
+        <div class="chat-actions">
+          <?php if ($nombreUsuario): ?>
+            <a href="Controller/login.controller.php?action=logout" class="btn-icon" title="Cerrar sesión" aria-label="Cerrar sesión">
+              <i class="fas fa-power-off"></i>
+            </a>
+          <?php endif; ?>
         </div>
-    </section>
+      </header> 
 
-
-      <!-- Chat -->
-      <section class="chat-section">
-        <div class="chat-app">
-          <header class="chat-header">
-            <div class="chat-avatar" aria-hidden="true">
-              <img src="img/mascota.png" alt="Avatar del chatbot" class="chat-avatar">
-            </div>
-            <div class="chat-title">
-              <h1>Junior</h1>
-              <p class="status"></p>
-            </div>
-            <div class="chat-actions">
-              <a href="./Controller/LoginController.php?action=logout" class="btn-icon" title="Cerrar sesión" aria-label="Cerrar sesión">
-                <i class="fas fa-power-off" aria-hidden="true"></i>
-              </a>
-            </div>
-          </header> 
-
-          <main id="chat-container" tabindex="0" role="log" aria-live="polite" aria-label="Mensajes del chat">
-            <div class="welcome-message visible">
-              <p>¡Bienvenido a Pepito Junior! <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></p>
-            </div>
-          </main>
-
-          <!-- Input y botones -->
-          <div class="input-container">
-            <label for="user-input" class="sr-only">Escribe tu mensaje</label>
-            <input type="text" id="user-input" placeholder="Escribe aquí tu mensaje" autocomplete="off" aria-label="Escribe tu mensaje">
-            <button id="send-btn" class="btn-send" aria-label="boton de enviar><i class="fas fa-bolt"></i></button>
-            <button id="record-btn" class="btn-attach" aria-label="boton de microfono"><i class="fas fa-microphone"></i></button>
-            <button class="btn-attach" aria-label="boton de subir archivos"><i class="fas fa-paperclip"></i></button>
-          </div>
+      <main id="chat-container" tabindex="0" role="log" aria-live="polite" aria-label="Mensajes del chat">
+        <div class="welcome-message visible">
+          <?php if ($nombreUsuario): ?>
+            <p>¡Bienvenido a Pepito Junior! <strong><?= htmlspecialchars($nombreUsuario); ?></strong></p>
+          <?php else: ?>
+            <p>¡Bienvenido a Pepito Junior! Iniciá sesión para comenzar.</p>
+          <?php endif; ?>
         </div>
-      </section>
+      </main>
+
+      <!-- Input y botones -->
+      <div class="input-container">
+        <label for="user-input" class="sr-only">Escribe tu mensaje</label>
+        <input type="text" id="user-input" placeholder="Escribe aquí tu mensaje" autocomplete="off">
+        <button id="send-btn" class="btn-send"><i class="fas fa-bolt"></i></button>
+        <button id="record-btn" class="btn-attach"><i class="fas fa-microphone"></i></button>
+        <button class="btn-attach"><i class="fas fa-paperclip"></i></button>
+      </div>
+    </div>
+  </section>
 
     <!-- FOOTER 
     <footer class="footer">
@@ -297,6 +321,17 @@ inputMensaje.addEventListener("keypress", (e) => {
 });
 </script>
 
+<script>
+  // Ocultar el cartel después de 3 segundos
+  setTimeout(() => {
+    const alertBox = document.getElementById('alert-msg');
+    if (alertBox) {
+      alertBox.style.transition = "opacity 0.5s ease";
+      alertBox.style.opacity = "0";
+      setTimeout(() => alertBox.remove(), 500);
+    }
+  }, 3000);
+</script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

@@ -1,6 +1,6 @@
 <?php
 require_once("./Model/rol.class.php");
-$roles = Rol::obtenerTodxs();
+$roles = Rol::obtenerTodos();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,18 +37,19 @@ $roles = Rol::obtenerTodxs();
         <tbody>
             <?php foreach ($roles as $rol): ?>
                 <tr>
-                    <td><?= $rol['id'] ?></td>
-                    <td><?= htmlspecialchars($rol['nombre']) ?></td>
+                    <td><?= htmlspecialchars($rol->getId()) ?></td>
+                    <td><?= htmlspecialchars($rol->getNombre()) ?></td>
                     <td>
-                        <a href="formEditarRol.php?id=<?= htmlspecialchars($rol['id']); ?>" class="editar" aria-label="editar rol">Editar Rol</a>
+                        <a href="formEditarRol.php?id=<?= htmlspecialchars($rol->getId()); ?>" class="editar" aria-label="editar rol">Editar Rol</a>
                         <form action="Controller/rol.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este rol?');">
                             <input type="hidden" name="operacion" value="eliminar"/>
-                            <input type="hidden" name="id" value="<?= $rol['id'] ?>">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($rol->getId()) ?>">
                             <button type="submit" class="eliminar" aria-label="eliminar rol">Eliminar</button>
                         </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
+
         </tbody>
     </table>
 

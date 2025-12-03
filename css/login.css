@@ -109,3 +109,26 @@ button:hover {
 .volver-destacado:hover {
   background-color: #d35400; /* naranja más oscuro */
 }
+.password-wrapper {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* espacio para el icono */
+}
+
+.toggle-password {
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;                /* lo coloca en el medio */
+  transform: translateY(-50%); /* lo centra verticalmente */
+  font-size: 18px;
+  color: #666;
+}
+
+.toggle-password:hover {
+  color: #000;
+}

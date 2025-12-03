@@ -2,18 +2,20 @@
 require_once(__DIR__ . "/Model/usuario.class.php");
 require_once(__DIR__ . "/Model/rol.class.php");
 
-$usuarios = Usuario::obtenerTodxs();
+// Obtener usuarios y roles
+$usuarios = Usuario::obtenerTodos();
 $roles = [];
-foreach (Rol::obtenerTodxs() as $r) {
-    $roles[$r['id']] = $r['nombre'];
+foreach (Rol::obtenerTodos() as $r) {
+    $roles[$r->getId()] = $r->getNombre();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Usuarios</title>
-    <link rel="stylesheet" href="css/Formlistar.css"> <!-- Estilo general -->
+    <link rel="stylesheet" href="css/Formlistar.css">
 </head>
 <body>
     <h2>Listado de Usuarios</h2>
@@ -34,15 +36,15 @@ foreach (Rol::obtenerTodxs() as $r) {
             <?php if (count($usuarios) > 0): ?>
                 <?php foreach ($usuarios as $usuario): ?>
                     <tr>
-                        <td><?= htmlspecialchars($usuario['id']) ?></td>
-                        <td><?= htmlspecialchars($usuario['nombre']) ?></td>
-                        <td><?= htmlspecialchars($usuario['email']) ?></td>
-                        <td><?= isset($roles[$usuario['rol_id']]) ? htmlspecialchars($roles[$usuario['rol_id']]) : 'Sin rol' ?></td>
+                        <td><?= htmlspecialchars($usuario->getId()) ?></td>
+                        <td><?= htmlspecialchars($usuario->getNombre()) ?></td>
+                        <td><?= htmlspecialchars($usuario->getEmail()) ?></td>
+                        <td><?= isset($roles[$usuario->getRol()]) ? htmlspecialchars($roles[$usuario->getRol()]) : 'Sin rol' ?></td>
                         <td>
-                            <a href="formEditarUsuario.php?id=<?= htmlspecialchars($usuario['id']) ?>" class="editar" aria-label="editar usuario">Editar</a>
+                            <a href="formEditarUsuario.php?id=<?= htmlspecialchars($usuario->getId()) ?>" class="editar" aria-label="editar usuario">Editar</a>
                             <form action="Controller/usuario.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este usuario?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($usuario['id']) ?>" />
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($usuario->getId()) ?>" />
                                 <button type="submit" class="eliminar" aria-label="eliminar usuario">Eliminar</button>
                             </form>
                         </td>
@@ -54,7 +56,6 @@ foreach (Rol::obtenerTodxs() as $r) {
         </tbody>
     </table>
 
-    <!-- Botón para volver al inicio -->
     <a class="volver-btn" href="index.php" aria-label="volver a inicio">← Volver al inicio</a>
 </body>
 </html>

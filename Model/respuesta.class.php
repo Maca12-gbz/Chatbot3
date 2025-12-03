@@ -105,4 +105,3 @@ class Respuesta {
     public function getPreguntaId() { return $this->pregunta_id; }
 }
 
-}

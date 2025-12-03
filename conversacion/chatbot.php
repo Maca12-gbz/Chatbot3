@@ -23,7 +23,7 @@ if ($preguntaOriginal === "") {
 // -------------------------
 $respuesta = Respuesta::buscar($preguntaOriginal) 
              ?: Respuesta::buscarFlexible($preguntaOriginal) 
-             ?: buscarPreguntaSimple($preguntaOriginal, $preguntasSimples) 
+             ?: buscarSimilar($preguntaOriginal, $preguntasSimples) 
              ?: "Lo siento, no encontré una respuesta relacionada.";
 
 // -------------------------

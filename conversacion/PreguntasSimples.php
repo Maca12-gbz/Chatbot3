@@ -1,5 +1,5 @@
 <?php
-$respuestas = [
+$preguntasSimples = [
     "hola" => "¡Hola! ¿Cómo estás?",
     "quién sos" => "Soy Pepito Junior, tu asistente virtual brutal.",
     "gracias" => "¡De nada! Estoy para ayudarte.",
@@ -14,13 +14,12 @@ $respuestas = [
 ];
 
 function buscarSimilar($mensaje, $frases) {
+    $mensaje = strtolower(trim($mensaje));
     foreach ($frases as $clave => $respuesta) {
-        similar_text(strtolower($mensaje), strtolower($clave), $porcentaje);
-        if ($porcentaje > 70 || strpos(strtolower($mensaje), strtolower($clave)) !== false) {
+        similar_text($mensaje, strtolower($clave), $porcentaje);
+        if ($porcentaje > 70 || strpos($mensaje, strtolower($clave)) !== false) {
             return $respuesta;
         }
     }
     return null;
 }
-?>
-
