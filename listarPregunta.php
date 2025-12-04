@@ -1,14 +1,7 @@
 <?php
 require_once(__DIR__ . "/Model/preguntas.class.php");
-require_once(__DIR__ . "/Model/categoria.class.php");
 
 $preguntas = Pregunta::obtenerTodxs();
-$categorias = [];
-
-// Cargar categorías por ID en un array asociativo
-foreach (Categoria::obtenerTodxs() as $c) {
-    $categorias[$c['id']] = $c['nombre'];
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +13,7 @@ foreach (Categoria::obtenerTodxs() as $c) {
 <body>
     <h2>Listado de Preguntas</h2>
 
-    <a class="agregar-btn" href="formAltaPregunta.php" aria-label="Agregar nueva pregunta">+ Nueva Pregunta</a>
+    <a class="agregar-btn" href="formAltaPregunta.php">+ Nueva Pregunta</a>
 
     <table>
         <thead>
@@ -35,26 +28,22 @@ foreach (Categoria::obtenerTodxs() as $c) {
             <?php if (count($preguntas) > 0): ?>
                 <?php foreach ($preguntas as $pregunta): ?>
                     <tr>
-                        <td><?= htmlspecialchars($pregunta['id']) ?></td>
-                        <td><?= htmlspecialchars($pregunta['preguntas']) ?></td>
-
-                        <!-- CORRECCIÓN FINAL: usar id_categorias -->
+                        <td><?= htmlspecialchars($pregunta->getId()) ?></td>
+                        <td><?= htmlspecialchars($pregunta->getTexto()) ?></td>
                         <td>
-                            <?= isset($categorias[$pregunta['id_categorias']]) 
-                                ? htmlspecialchars($categorias[$pregunta['id_categorias']]) 
+                            <?= $pregunta->getCategoria()
+                                ? htmlspecialchars($pregunta->getCategoria()->getNombre())
                                 : 'Sin categoría' ?>
                         </td>
-
                         <td>
                             <form action="formEditarPregunta.php" method="GET" style="display:inline;">
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($pregunta['id']) ?>" />
-                                <button type="submit" class="editar" aria-label="editar pregunta">Editar</button>
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($pregunta->getId()) ?>" />
+                                <button type="submit" class="editar">Editar</button>
                             </form>
-
                             <form action="Controller/pregunta.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar esta pregunta?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($pregunta['id']) ?>" />
-                                <button type="submit" class="eliminar" aria-label="eliminar pregunta">Eliminar</button>
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($pregunta->getId()) ?>" />
+                                <button type="submit" class="eliminar">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -65,6 +54,6 @@ foreach (Categoria::obtenerTodxs() as $c) {
         </tbody>
     </table>
 
-    <a class="volver-btn" href="index.php" aria-label="volver al inicio">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php">← Volver al inicio</a>
 </body>
 </html>

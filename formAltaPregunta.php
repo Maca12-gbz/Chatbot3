@@ -44,7 +44,7 @@ if (isset($_GET['exito'])) {
         <select name="id_categoria" id="id_categoria" required>
             <option value="">Seleccione</option>
             <?php foreach ($categorias as $c): ?>
-                <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['nombre']) ?></option>
+                <option value="<?= $c->getId() ?>"><?= htmlspecialchars($c->getNombre()) ?></option>
             <?php endforeach; ?>
         </select><br><br>
 

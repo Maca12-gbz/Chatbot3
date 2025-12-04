@@ -27,13 +27,15 @@ $categorias = Categoria::obtenerTodxs();
             <?php if (count($categorias) > 0): ?>
                 <?php foreach ($categorias as $categoria): ?>
                     <tr>
-                        <td><?= htmlspecialchars($categoria['id']) ?></td>
-                        <td><?= htmlspecialchars($categoria['nombre']) ?></td>
+                        <td><?= htmlspecialchars($categoria->getId()) ?></td>
+                        <td><?= htmlspecialchars($categoria->getNombre()) ?></td>
                         <td>
-                           <a href="formEditarCategoria.php?id=<?= htmlspecialchars($categoria['id']) ?>" class="editar" aria-label="editar categoría" >Editar Categoría</a>
-                            <form action="Controller/categoria.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar esta categoría?');">
+                            <a href="formEditarCategoria.php?id=<?= htmlspecialchars($categoria->getId()) ?>" 
+                            class="editar" aria-label="editar categoría">Editar Categoría</a>
+                            <form action="Controller/categoria.controller.php" method="POST" style="display:inline;" 
+                                onsubmit="return confirm('¿Seguro que querés eliminar esta categoría?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($categoria['id']) ?>" />
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($categoria->getId()) ?>" />
                                 <button type="submit" class="eliminar" aria-label="eliminar categoría">Eliminar</button>
                             </form>
                         </td>

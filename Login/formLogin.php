@@ -43,6 +43,9 @@ unset($_SESSION['old_email']);
   </form>
 
   <hr style="margin:20px 0;">
+    <?php if ($error_message): ?>
+      <p class="message">¿No tenés cuenta? Registrate aquí abajo 👇</p>
+    <?php endif; ?>
   <a href="formRegistro.php"><button class="secondary-btn">Registrar nuevo usuario</button></a>
 
   <div class="volver-separado">

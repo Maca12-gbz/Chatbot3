@@ -34,7 +34,6 @@ if (isset($_GET['exito'])) {
     <?php endif; ?>
 
     <form action="Controller/respuesta.controller.php" method="POST">
-        <!-- ahora coincide con el controller -->
         <input type="hidden" name="operacion" value="guardar" />
 
         <label for="respuesta">Respuesta:</label><br>
@@ -44,14 +43,16 @@ if (isset($_GET['exito'])) {
         <select name="pregunta_id" id="pregunta_id" required>
             <option value="">Seleccione</option>
             <?php foreach ($preguntas as $p): ?>
-                <option value="<?= $p['id'] ?>"><?= htmlspecialchars($p['preguntas']) ?></option>
+                <option value="<?= $p->getId() ?>">
+                    <?= htmlspecialchars($p->getTexto()) ?>
+                </option>
             <?php endforeach; ?>
         </select><br><br>
 
         <button type="submit" aria-label="Agregar Respuesta">Guardar</button>
     </form>
 
-    <!-- Botón para volver al inicio -->
     <a class="volver-btn" href="index.php" aria-label="Volver">← Volver al inicio</a>
 </body>
 </html>
+

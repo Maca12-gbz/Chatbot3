@@ -1,15 +1,23 @@
 <?php
+// -------------------------
+// CONFIGURACIÓN INICIAL
+// -------------------------
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once "../Model/conversacion.class.php";
-require_once "../Model/respuesta.class.php";
-
-
-ini_set('display_errors', 0);
+// Mostrar errores en desarrollo (desactivar en producción)
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// -------------------------
+// INCLUDES NECESARIOS
+// -------------------------
+require_once __DIR__ . "/../Model/conversacion.class.php";
+require_once __DIR__ . "/../Model/respuesta.class.php";
+require_once __DIR__ . "/../preguntasSimples.php"; // debe existir y definir $preguntasSimples y buscarSimilar()
 
-// Obtener el JSON enviado
+// -------------------------
+// LEER JSON DEL FRONTEND
+// -------------------------
 $input = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($input["pregunta"]) || trim($input["pregunta"]) === "") {
@@ -19,16 +27,43 @@ if (!isset($input["pregunta"]) || trim($input["pregunta"]) === "") {
 
 $pregunta = trim($input["pregunta"]);
 
-// Buscar primero en BD, luego en preguntas simples
-$respuesta = Respuesta::buscar($pregunta) 
-             ?: Respuesta::buscarFlexible($pregunta) 
-             ?: "Lo siento, no encontré una respuesta relacionada.";
+// -------------------------
+// BUSCAR RESPUESTA
+// -------------------------
+$respuesta = null;
 
-// Guardar conversación
-$conversacion = new Conversacion($pregunta, $respuesta);
-$conversacion->guardar();
+// 1. Intentar búsqueda exacta
+if (method_exists("Respuesta", "buscar")) {
+    $respuesta = Respuesta::buscar($pregunta);
+}
 
-header("Content-Type: application/json; charset=UTF-8");
-echo json_encode(["respuesta" => $respuesta]);
+// 2. Intentar búsqueda flexible
+if (!$respuesta && method_exists("Respuesta", "buscarFlexible")) {
+    $respuesta = Respuesta::buscarFlexible($pregunta);
+}
+
+// 3. Intentar búsqueda en preguntas simples
+if (!$respuesta && function_exists("buscarSimilar") && isset($preguntasSimples)) {
+    $respuesta = buscarSimilar($pregunta, $preguntasSimples);
+}
+
+// 4. Fallback
+if (!$respuesta) {
+    $respuesta = "Lo siento, no encontré una respuesta relacionada.";
+}
+
+// -------------------------
+// GUARDAR CONVERSACIÓN
+// -------------------------
+if (class_exists("Conversacion")) {
+    $conversacion = new Conversacion($pregunta, $respuesta);
+    if (method_exists($conversacion, "guardar")) {
+        $conversacion->guardar();
+    }
+}
+
+// -------------------------
+// DEVOLVER JSON
+// -------------------------
+echo json_encode(["respuesta" => $respuesta], JSON_UNESCAPED_UNICODE);
 exit;
-

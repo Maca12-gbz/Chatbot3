@@ -1,6 +1,6 @@
 <?php
 require_once("Model/rol.class.php");
-$roles = Rol::obtenerTodxs();
+$roles = Rol::obtenerTodos();
 
 $mensaje = '';
 if (isset($_GET['exito'])) {
@@ -55,9 +55,12 @@ if (isset($_GET['exito'])) {
         <select name="rol_id" id="rol_id" required>
             <option value="">Seleccione un rol</option>
             <?php foreach ($roles as $rol): ?>
-                <option value="<?= htmlspecialchars($rol['id']) ?>"><?= htmlspecialchars($rol['nombre']) ?></option>
+                <option value="<?= htmlspecialchars($rol->getId()) ?>">
+                    <?= htmlspecialchars($rol->getNombre()) ?>
+                </option>
             <?php endforeach; ?>
         </select>
+
 
         <!-- Botón para agregar usuario -->
         <button type="submit" aria-label="Agregar Usuario">Agregar Usuario</button>

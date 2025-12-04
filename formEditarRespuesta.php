@@ -1,6 +1,6 @@
 <?php
-require_once("./Model/preguntas.class.php");
-require_once("./Model/respuesta.class.php");
+require_once(__DIR__ . "/Model/preguntas.class.php");
+require_once(__DIR__ . "/Model/respuesta.class.php");
 
 // Validación estricta del ID
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
@@ -21,7 +21,7 @@ $preguntas = Pregunta::obtenerTodxs();
 <head>
     <meta charset="UTF-8">
     <title>Editar Respuesta | Sistema de FAQs</title>
-    <link rel="stylesheet" href="css/formEditar.css"> <!-- Estilo general para edición -->
+    <link rel="stylesheet" href="css/formEditar.css">
 </head>
 <body>
     <div class="form-container">
@@ -49,10 +49,10 @@ $preguntas = Pregunta::obtenerTodxs();
                     <option value="" disabled>-- Seleccione una pregunta --</option>
                     <?php foreach ($preguntas as $pregunta): ?>
                         <option 
-                            value="<?= htmlspecialchars($pregunta['id'], ENT_QUOTES, 'UTF-8') ?>"
-                            <?= $pregunta['id'] == $respuestaObj->getPreguntaId() ? 'selected' : '' ?>
+                            value="<?= htmlspecialchars($pregunta->getId(), ENT_QUOTES, 'UTF-8') ?>"
+                            <?= $respuestaObj->getPregunta() && $pregunta->getId() == $respuestaObj->getPregunta()->getId() ? 'selected' : '' ?>
                         >
-                            <?= htmlspecialchars($pregunta['preguntas'], ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars($pregunta->getTexto(), ENT_QUOTES, 'UTF-8') ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -61,7 +61,6 @@ $preguntas = Pregunta::obtenerTodxs();
             <button type="submit" aria-label="Guardar Cambios">Guardar Cambios</button>
         </form>
 
-        <!-- Botón volver -->
         <a href="listarRespuesta.php" class="volver-btn" aria-label="Volver">← Volver</a>
     </div>
 </body>

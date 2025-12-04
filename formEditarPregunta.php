@@ -1,8 +1,9 @@
 <?php
-include "Model/preguntas.class.php";
-include "Model/categoria.class.php";
+require_once __DIR__ . "/Model/preguntas.class.php";
+require_once __DIR__ . "/Model/categoria.class.php";
 
 $categorias = Categoria::obtenerTodxs();
+$pregunta = null;
 
 if (isset($_GET['id'])) {
     $pregunta = Pregunta::obtenerPorId($_GET['id']);
@@ -30,8 +31,9 @@ if (isset($_GET['id'])) {
             <label for="id_categoria">Categoría:</label>
             <select id="id_categoria" name="id_categoria" required>
                 <?php foreach ($categorias as $categoria): ?>
-                    <option value="<?= $categoria['id'] ?>" <?= $categoria['id'] == $pregunta->getIdCategoria() ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($categoria['nombre']) ?>
+                    <option value="<?= $categoria->getId() ?>" 
+                        <?= $pregunta->getCategoria() && $categoria->getId() == $pregunta->getCategoria()->getId() ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($categoria->getNombre()) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -47,4 +49,3 @@ if (isset($_GET['id'])) {
     <?php endif; ?>
 </body>
 </html>
-

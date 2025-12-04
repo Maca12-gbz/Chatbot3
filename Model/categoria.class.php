@@ -25,16 +25,26 @@ class Categoria {
     }
 
     public static function obtenerTodxs() {
-        $conexion = Database::getInstance()->getConnection();
-        $sql = "SELECT * FROM categorias";
-        $stmt = $conexion->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conexion = Database::getInstance()->getConnection();
+    $sql = "SELECT * FROM categorias";
+    $stmt = $conexion->query($sql);
+    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $categorias = [];
+    foreach ($resultados as $fila) {
+        $categorias[] = new Categoria($fila['id'], $fila['nombre']);
+    }
+    return $categorias;
     }
 
     public function guardar() {
-        $sql = "INSERT INTO categorias (nombre) VALUES (?)";
-        $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->nombre]);
+    $sql = "INSERT INTO categorias (nombre) VALUES (?)";
+    $stmt = $this->conexion->prepare($sql);
+    $ok = $stmt->execute([$this->nombre]);
+    if ($ok) {
+        $this->id = $this->conexion->lastInsertId();
+    }
+    return $ok;
     }
 
     public function actualizar() {

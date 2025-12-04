@@ -2,21 +2,32 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include "../Model/preguntas.class.php";
+require_once __DIR__ . "/../Model/preguntas.class.php";
+
 
 $operacion = $_POST["operacion"] ?? '';
 $result = null;
 
 if ($operacion === "guardar") {
-    $pregunta = new Pregunta(null, $_POST['texto'], $_POST['id_categoria']);
+    $texto = $_POST['texto'] ?? '';
+    $id_categoria = $_POST['id_categoria'] ?? '';
+
+    $categoriaObj = Categoria::obtenerPorId($id_categoria);
+    $pregunta = new Pregunta(null, $texto, $categoriaObj);
     $result = $pregunta->guardar();
 
 } elseif ($operacion === "actualizar") {
-    $pregunta = new Pregunta($_POST['id'], $_POST['texto'], $_POST['id_categoria']);
+    $id = $_POST['id'] ?? '';
+    $texto = $_POST['texto'] ?? '';
+    $id_categoria = $_POST['id_categoria'] ?? '';
+
+    $categoriaObj = Categoria::obtenerPorId($id_categoria);
+    $pregunta = new Pregunta($id, $texto, $categoriaObj);
     $result = $pregunta->actualizar();
 
 } elseif ($operacion === "eliminar") {
-    $pregunta = new Pregunta($_POST['id'], null, null);
+    $id = $_POST['id'] ?? '';
+    $pregunta = new Pregunta($id, null, null);
     $result = $pregunta->eliminar();
 }
 ?>
@@ -38,4 +49,3 @@ if ($operacion === "guardar") {
   </div>
 </body>
 </html>
-

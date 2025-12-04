@@ -170,7 +170,7 @@ $nombreUsuario = $_SESSION['usuario']['nombre'] ?? null;
     </footer> -->
 
   <!-- SCRIPT -->
-<script>
+<script type="text/javascript">
 // ---------------------------
 // Elementos del DOM
 // ---------------------------
@@ -229,14 +229,7 @@ function mostrarMensajeBot(texto) {
 }
 
 function mostrarTyping() {
-  chatContainer.insertAdjacentHTML("beforeend", `
-    <div class="message bot-message typing-indicator">
-      <div class="message-avatar"><i class="fas fa-robot"></i></div>
-      <div class="message-content-wrapper">
-        <div class="typing-dots"><span></span><span></span><span></span></div>
-      </div>
-    </div>
-  `);
+  chatContainer.insertAdjacentHTML("beforeend", '<div class="message bot-message typing-indicator"><div class="message-avatar"><i class="fas fa-robot"></i></div><div class="message-content-wrapper"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>');
   scrollToBottom();
 }
 
@@ -305,6 +298,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 // Eventos de envío
 // ---------------------------
 sendBtn.addEventListener("click", () => {
+  console.log('entro');
   const mensaje = inputMensaje.value.trim();
   if (mensaje !== "") {
     mostrarMensajeUsuario(mensaje);

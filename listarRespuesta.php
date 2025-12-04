@@ -5,8 +5,9 @@ require_once(__DIR__ . "/Model/preguntas.class.php");
 $respuestas = Respuesta::obtenerTodxs();
 $preguntas = [];
 
+// Cargar preguntas en un array asociativo usando getters
 foreach (Pregunta::obtenerTodxs() as $p) {
-    $preguntas[$p['id']] = $p['preguntas'];
+    $preguntas[$p->getId()] = $p->getTexto();
 }
 ?>
 <!DOCTYPE html>
@@ -34,18 +35,22 @@ foreach (Pregunta::obtenerTodxs() as $p) {
             <?php if (count($respuestas) > 0): ?>
                 <?php foreach ($respuestas as $r): ?>
                     <tr>
-                        <td><?= htmlspecialchars($r['id']) ?></td>
-                        <td><?= htmlspecialchars($r['respuesta']) ?></td>
-                        <td><?= isset($preguntas[$r['pregunta_id']]) ? htmlspecialchars($preguntas[$r['pregunta_id']]) : 'Sin pregunta' ?></td>
+                        <td><?= htmlspecialchars($r->getId()) ?></td>
+                        <td><?= htmlspecialchars($r->getTexto()) ?></td>
+                        <td>
+                            <?= $r->getPregunta() 
+                                ? htmlspecialchars($r->getPregunta()->getTexto()) 
+                                : 'Sin pregunta' ?>
+                        </td>
                         <td>
                             <form action="formEditarRespuesta.php" method="GET" style="display:inline;">
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($r['id']) ?>" />
-                               <button type="submit" class="editar" aria-label="editar respuesta">Editar</button>
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($r->getId()) ?>" />
+                                <button type="submit" class="editar" aria-label="editar respuesta">Editar</button>
                             </form>
                             <form action="Controller/respuesta.controller.php" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar esta respuesta?');">
                                 <input type="hidden" name="operacion" value="eliminar" />
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($r['id']) ?>" />
-                                <button type="submit" class="eliminar"aria-label="eliminar respuesta">Eliminar</button>
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($r->getId()) ?>" />
+                                <button type="submit" class="eliminar" aria-label="eliminar respuesta">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -57,6 +62,7 @@ foreach (Pregunta::obtenerTodxs() as $p) {
     </table>
 
     <!-- Botón para volver al inicio -->
-    <a class="volver-btn" href="index.php" aria-label="colver a inicio">← Volver al inicio</a>
+    <a class="volver-btn" href="index.php" aria-label="volver a inicio">← Volver al inicio</a>
 </body>
 </html>
+
